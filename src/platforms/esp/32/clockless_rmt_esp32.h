@@ -319,7 +319,7 @@ public:
     //    handler (below), or as a callback from the built-in
     //    interrupt handler. It is static because we don't know which
     //    controller is done until we look it up.
-    static void IRAM_ATTR doneOnChannel(rmt_channel_t channel, void * arg);
+    static void doneOnChannel(rmt_channel_t channel, void * arg);
     
     // -- Custom interrupt handler
     //    This interrupt handler handles two cases: a controller is
@@ -333,7 +333,7 @@ public:
     //    long to hold the signal high, followed by how long to hold it low.
     //    NOTE: Now the default is to use 128-bit buffers, so half a buffer is
     //          is 64 bits. See FASTLED_RMT_MEM_BLOCKS
-    void IRAM_ATTR fillNext(bool check_time);
+    void fillNext(bool check_time);
 
     // -- Init pulse buffer
     //    Set up the buffer that will hold all of the pulse items for this
