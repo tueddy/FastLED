@@ -2,6 +2,10 @@
 [![arduino-library-badge](https://www.ardu-badge.com/badge/FastLED.svg)](https://www.ardu-badge.com/FastLED)
 ![build status](https://github.com/FastLED/FastLED/workflows/build/badge.svg)
 
+IMPORTANT NOTE: 
+This fork was created to temporarily save IRAM for the ESPuino project. 
+Use the official code for larger number of neopixel LEDs!
+
 IMPORTANT NOTE: For AVR based systems, avr-gcc 4.8.x is supported and tested.  This means Arduino 1.6.5 and later.
 
 

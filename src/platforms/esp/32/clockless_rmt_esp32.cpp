@@ -154,7 +154,8 @@ void ESP32RMTController::init(gpio_num_t pin)
         //    strips, so it delegates to the refill function for each
         //    specific instantiation of ClocklessController.
         if (gRMT_intr_handle == NULL)
-            esp_intr_alloc(ETS_RMT_INTR_SOURCE, ESP_INTR_FLAG_IRAM | ESP_INTR_FLAG_LEVEL3, interruptHandler, 0, &gRMT_intr_handle);
+            esp_intr_alloc(ETS_RMT_INTR_SOURCE, ESP_INTR_FLAG_LEVEL3, interruptHandler, 0, &gRMT_intr_handle); // removed the attribute ESP_INTR_FLAG_IRAM
+//            esp_intr_alloc(ETS_RMT_INTR_SOURCE, ESP_INTR_FLAG_IRAM | ESP_INTR_FLAG_LEVEL3, interruptHandler, 0, &gRMT_intr_handle);
     }
 
     gInitialized = true;
