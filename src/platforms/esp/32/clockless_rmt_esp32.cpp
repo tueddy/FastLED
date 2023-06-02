@@ -154,7 +154,8 @@ void ESP32RMTController::init(gpio_num_t pin)
         //    strips, so it delegates to the refill function for each
         //    specific instantiation of ClocklessController.
         if (gRMT_intr_handle == NULL)
-            esp_intr_alloc(ETS_RMT_INTR_SOURCE, ESP_INTR_FLAG_IRAM | ESP_INTR_FLAG_LEVEL3, interruptHandler, 0, &gRMT_intr_handle);
+            esp_intr_alloc(ETS_RMT_INTR_SOURCE, ESP_INTR_FLAG_LEVEL3, interruptHandler, 0, &gRMT_intr_handle); // removed the attribute ESP_INTR_FLAG_IRAM
+//            esp_intr_alloc(ETS_RMT_INTR_SOURCE, ESP_INTR_FLAG_IRAM | ESP_INTR_FLAG_LEVEL3, interruptHandler, 0, &gRMT_intr_handle);
     }
 
     gInitialized = true;
@@ -338,7 +339,7 @@ void IRAM_ATTR ESP32RMTController::tx_start()
 //    handler (below), or as a callback from the built-in
 //    interrupt handler. It is static because we don't know which
 //    controller is done until we look it up.
-void IRAM_ATTR ESP32RMTController::doneOnChannel(rmt_channel_t channel, void * arg)
+void ESP32RMTController::doneOnChannel(rmt_channel_t channel, void * arg)
 {
     ESP32RMTController * pController = gOnChannel[channel];
 
@@ -461,7 +462,7 @@ void IRAM_ATTR ESP32RMTController::interruptHandler(void *arg)
 //    Puts 32 bits of pixel data into the next 32 slots in the RMT memory
 //    Each data bit is represented by a 32-bit RMT item that specifies how
 //    long to hold the signal high, followed by how long to hold it low.
-void IRAM_ATTR ESP32RMTController::fillNext(bool check_time)
+void ESP32RMTController::fillNext(bool check_time)
 {
     uint32_t now = __clock_cycles();
     if (check_time) {
