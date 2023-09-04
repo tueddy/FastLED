@@ -285,7 +285,7 @@ public:
     ESP32RMTController(int DATA_PIN, int T1, int T2, int T3, int maxChannel, int memBlocks);
 
     // -- Get max cycles per fill
-    uint32_t IRAM_ATTR getMaxCyclesPerFill() const { return mMaxCyclesPerFill; }
+    uint32_t getMaxCyclesPerFill() const { return mMaxCyclesPerFill; }
 
     // -- Get or create the pixel data buffer
     uint8_t * getPixelBuffer(int size_in_bytes);
@@ -297,17 +297,17 @@ public:
 
     // -- Show this string of pixels
     //    This is the main entry point for the pixel controller
-    void IRAM_ATTR showPixels();
+    void showPixels();
 
     // -- Start up the next controller
     //    This method is static so that it can dispatch to the
     //    appropriate startOnChannel method of the given controller.
-    static void IRAM_ATTR startNext(int channel);
+    static void startNext(int channel);
 
     // -- Start this controller on the given channel
     //    This function just initiates the RMT write; it does not wait
     //    for it to finish.
-    void IRAM_ATTR startOnChannel(int channel);
+    void startOnChannel(int channel);
 
     // -- Start RMT transmission
     //    Setting this RMT flag is what actually kicks off the peripheral

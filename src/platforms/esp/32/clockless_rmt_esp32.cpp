@@ -164,7 +164,7 @@ void ESP32RMTController::init(gpio_num_t pin)
 
 // -- Show this string of pixels
 //    This is the main entry point for the pixel controller
-void IRAM_ATTR ESP32RMTController::showPixels()
+void ESP32RMTController::showPixels()
 {
     if (gNumStarted == 0) {
         // -- First controller: make sure everything is set up
@@ -224,7 +224,7 @@ void IRAM_ATTR ESP32RMTController::showPixels()
 // -- Start up the next controller
 //    This method is static so that it can dispatch to the
 //    appropriate startOnChannel method of the given controller.
-void IRAM_ATTR ESP32RMTController::startNext(int channel)
+void ESP32RMTController::startNext(int channel)
 {
     if (gNext < gNumControllers) {
         ESP32RMTController * pController = gControllers[gNext];
@@ -236,7 +236,7 @@ void IRAM_ATTR ESP32RMTController::startNext(int channel)
 // -- Start this controller on the given channel
 //    This function just initiates the RMT write; it does not wait
 //    for it to finish.
-void IRAM_ATTR ESP32RMTController::startOnChannel(int channel)
+void ESP32RMTController::startOnChannel(int channel)
 {
     esp_err_t espErr = ESP_OK;
     // -- Assign this channel and configure the RMT
